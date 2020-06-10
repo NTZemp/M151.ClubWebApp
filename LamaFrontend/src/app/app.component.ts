@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'LamaFrontend';
+
+  login(){
+    console.log("loging in")
+  }
 }

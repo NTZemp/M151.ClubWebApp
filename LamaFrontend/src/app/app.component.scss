@@ -1,0 +1,39 @@
+nav{
+    font-size: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    ul{
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid rgb(34, 34, 34);
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        li{
+
+            a{
+                text-decoration: none;
+                color:inherit;
+            }
+        }
+    }
+}
+
+#navDivider{
+    flex: 1 1 auto;
+}
+
+#login{
+    text-align: right;
+    vertical-align: middle;
+    margin-right: 30px;
+    padding: 10px;
+    background-color: #07591C;
+    color: white;
+    border-radius: 20px;
+}
+
+#login:hover{
+    cursor:  pointer;
+}
