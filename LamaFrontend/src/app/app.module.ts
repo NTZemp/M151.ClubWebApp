@@ -4,8 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartPageComponent } from './components/start-page/start-page.component';
-import {MsalAngularConfiguration, MsalModule} from '@azure/msal-angular';
+import {MsalAngularConfiguration, MsalModule, MsalInterceptor, MSAL_CONFIG, MSAL_CONFIG_ANGULAR, MsalService, MsalGuard} from '@azure/msal-angular';
+import {Configuration} from 'msal'
 import { ClubsComponent } from './components/clubs/clubs.component';
+import { msalConfig, msalAngularConfig } from './app.config';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+function MSALConfigFactory(): Configuration {
+  return msalConfig;
+}
+
+function MSALAngularConfigFactory(): MsalAngularConfiguration {
+  return msalAngularConfig;
+}
 
 @NgModule({
   declarations: [
@@ -16,19 +27,26 @@ import { ClubsComponent } from './components/clubs/clubs.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MsalModule.forRoot({
-      auth: {
-          clientId: 'Enter_the_Application_Id_here', // This is your client ID
-          authority: 'https://login.microsoftonline.com/Enter_the_Tenant_Info_Here', // This is your tenant info
-          redirectUri: 'Enter_the_Redirect_Uri_Here' // This is your redirect URI
-      },
-      cache: {
-          cacheLocation: 'localStorage',
-          storeAuthStateInCookie: false, // set to true for IE 11
-      },
-   }),
+    MsalModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
+    {
+      provide: MSAL_CONFIG,
+      useFactory: MSALConfigFactory
+    },
+    {
+      provide: MSAL_CONFIG_ANGULAR,
+      useFactory: MSALAngularConfigFactory
+    },
+    MsalGuard,
+    MsalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

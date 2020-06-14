@@ -13,9 +13,14 @@
       </li>
       <li id="navDivider">
       </li>
-      <li id="login">
+      <li id="login" *ngIf="isAuthenticated == true">
         <a (click)="login()"> 
           Log In
+        </a>
+      </li>
+      <li id="login" *ngIf="isAuthenticated == true">
+        <a (click)="profile()"> 
+          Profile
         </a>
       </li>
     </ul>
