@@ -41,6 +41,18 @@ namespace Lama.Api
             services.AddHttpContextAccessor();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IClubsService, ClubsService>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "CORS",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin();
+                                      builder.AllowAnyHeader();
+                                      builder.AllowAnyMethod();
+                                  });
+            });
+
             services.AddRazorPages();
         }
 
@@ -64,6 +76,8 @@ namespace Lama.Api
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("CORS");
 
             app.UseAddUserToDbIfNotExists();
             app.UseEndpoints(endpoints =>

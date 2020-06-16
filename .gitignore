@@ -3,3 +3,8 @@ appsettings.Development.json
 bin/
 .vs/
 obj/
+Lama.Api/Migrations/.DS_Store
+Lama.Api/.DS_Store
+.DS_Store
+Lama.Api/.DS_Store
+.DS_Store

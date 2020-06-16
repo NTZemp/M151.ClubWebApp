@@ -34,7 +34,7 @@ namespace Lama.Api.Controllers
         public async Task<IActionResult> Create([FromBody] Club club)
         {
             var clubRes = await _clubsService.Add(club.ClubName);
-            return new CreatedResult(HttpContext.GetEndpoint().DisplayName, clubRes);
+            return new CreatedResult(HttpContext.GetEndpoint().DisplayName);
         }
 
         // GET: api/Club/5

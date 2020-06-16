@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Lama.Api.Data.Models;
+using Lama.Api.Data.Models.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,31 +20,9 @@ namespace Lama.Api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.Entity<ApiUser>()
-                .HasKey(u => u.UserId);
-
-            modelBuilder.Entity<ClubMembership>()
-                .Property(e => e.ClubId)
-                .IsRequired();
-
-            modelBuilder.Entity<ClubMembership>()
-                .Property(e => e.UserId)
-                .IsRequired();
-
-            modelBuilder.Entity<ClubMembership>()
-                .HasOne(cm => cm.User)
-                .WithMany(u => u.Memberships)
-                .HasForeignKey(cm => cm.UserId);
-
-            modelBuilder.Entity<ClubMembership>()
-                .HasOne(cm => cm.Club)
-                .WithMany(c => c.Memberships)
-                .HasForeignKey(cm => cm.ClubId);
-
-            modelBuilder.Entity<Club>()
-                .Property(e => e.ClubName)
-                .IsRequired();
+            modelBuilder.ApplyConfiguration(new ApiUserConfiguration());
+            modelBuilder.ApplyConfiguration(new ClubConfiguration());
+            modelBuilder.ApplyConfiguration(new ClubMembershipConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

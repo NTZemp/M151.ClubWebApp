@@ -1,4 +1,13 @@
 <p>clubs works!</p>
+
+
+<input id="clubName" (keyup)="clubNameChanged($event)" placeholder="Vereinsname"/>
+<button (click)="createClub()">+</button>
+ 
+
+<div *ngIf="clubs.length == 0">
+Sie sind noch nicht miglied eines clubs
+</div>
 <div *ngFor="let club of clubs">
     {{club.ClubName}}
 </div>
