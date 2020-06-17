@@ -68,11 +68,31 @@ namespace Lama.Api.Data.Services
             var currentUser = await _userService.GetLoggedInUserAsync();
             if(await isMember(currentUser.UserId, clubId))
             {
-                return await _context.Clubs.FindAsync(clubId);
+                return await _context.Clubs.Where(c => c.ClubId == clubId)
+                    .Include(c => c.Memberships)
+                        .ThenInclude(m => m.User)
+                    .SingleAsync();
             }
             else
             {
                 throw new UnauthorizedException($"Not authorized to access club with id, {clubId}");
+            }
+        }
+
+        public async Task<Club> GetClubByName(string clubName)
+        {
+            var club = await _context.Clubs.Where(c => c.ClubName == clubName).SingleAsync();
+            var currentUser = await _userService.GetLoggedInUserAsync();
+            if (await isMember(currentUser.UserId, club.ClubId))
+            {
+                return await _context.Clubs.Where(c => c.ClubId == club.ClubId)
+                    .Include(c => c.Memberships)
+                        .ThenInclude(m => m.User)
+                    .SingleAsync();
+            }
+            else
+            {
+                throw new UnauthorizedException($"Not authorized to access club with id, {club.ClubId}");
             }
         }
 

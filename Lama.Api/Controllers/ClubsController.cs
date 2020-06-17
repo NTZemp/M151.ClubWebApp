@@ -49,12 +49,15 @@ namespace Lama.Api.Controllers
         }
 
         // GET: api/Club/5
-        [HttpGet("{id}", Name = "Get")]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("{name}", Name = "Get")]
+        public async Task<IActionResult> Get(string name)
         {
             try
             {
-                return new JsonResult(await _clubsService.GetClub(id));
+                name = name.Replace('-', ' ');
+                var club = await _clubsService.GetClubByName(name);
+                var clubResponse = _mapper.Map<ClubDetailsResponse>(club);
+                return new JsonResult(clubResponse);
             }
             catch (UnauthorizedException)
             {
@@ -67,7 +70,7 @@ namespace Lama.Api.Controllers
         {
             try
             {
-                return new JsonResult(await _clubsService.AddMember(id,user));
+                return new JsonResult(_mapper.Map<ClubResponse>(await _clubsService.AddMember(id,user)));
             }
             catch (UnauthorizedException)
             {
