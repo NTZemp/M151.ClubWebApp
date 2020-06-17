@@ -9,6 +9,7 @@ import {Configuration} from 'msal'
 import { ClubsComponent } from './components/clubs/clubs.component';
 import { msalConfig, msalAngularConfig } from './app.config';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ClubComponent } from './components/club/club.component';
 
 function MSALConfigFactory(): Configuration {
   return msalConfig;
@@ -23,6 +24,7 @@ function MSALAngularConfigFactory(): MsalAngularConfiguration {
     AppComponent,
     StartPageComponent,
     ClubsComponent,
+    ClubComponent,
   ],
   imports: [
     BrowserModule,

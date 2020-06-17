@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'LamaFrontend';
   isAuthenticated:boolean;
+  
   constructor(private msal:MsalService, public router:Router){
     
   }
@@ -24,6 +25,6 @@ export class AppComponent implements OnInit{
   }
 
   login(){
-    this.msal.acquireTokenRedirect(tokenRequest);
+    this.msal.loginRedirect(tokenRequest);
   }
 }

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthError, InteractionRequiredAuthError } from 'msal';
 import { MsalService } from '@azure/msal-angular';
 import Club from 'src/app/models/club';
+import { ClubService } from 'src/app/services/club.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clubs',
@@ -13,10 +15,25 @@ export class ClubsComponent implements OnInit {
   clubs:Array<Club>;
 
   clubName:string;
-  constructor(private http: HttpClient,private authService:MsalService) { }
+  constructor(private clubService:ClubService, private router:Router) { }
 
   ngOnInit(): void {
-    this.getClubs();
+   this.getClubs();
+  }
+
+  getClubs(){
+    this.clubService.getClubs().subscribe({
+      next: (clubs:Array<Club>) => {
+        this.clubs = clubs;
+      },
+      error: (err)=>{
+        this.clubService.handleError(err);
+      }
+    });
+  }
+
+  clubDetails(name:string){
+    this.router.navigate(['/clubs/'+ name])
   }
 
   clubNameChanged(event){
@@ -24,50 +41,8 @@ export class ClubsComponent implements OnInit {
   }
 
   createClub(){
-    var club = new Club();
-    club.clubName = this.clubName;
-    var url = 'https://localhost:5001/api/clubs';
-    this.http.post(url,
-        JSON.stringify(club),
-        {
-          headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        }
-      ).subscribe({
-      next: result => {
-        console.log(result);
-      },
-      error: (err: AuthError) => {
-        console.log('auth error');
-        // If there is an interaction required error,
-        // call one of the interactive methods and then make the request again.
-        if (InteractionRequiredAuthError.isInteractionRequiredError(err.errorCode)) {
-          this.authService.acquireTokenPopup({
-            scopes: this.authService.getScopesForEndpoint(url)
-          })
-        }
-      }
-    });
+    this.clubService.createClub(this.clubName);
     this.getClubs();
+    this.clubName = '';
   }
-
-  getClubs(){
-    var url = 'https://localhost:5001/api/clubs';
-    this.http.get(url).subscribe({
-      next: (clubs:Array<Club>) => {
-        console.log(clubs);
-        this.clubs = clubs;
-      },
-      error: (err: AuthError) => {
-        console.log('auth error');
-        // If there is an interaction required error,
-        // call one of the interactive methods and then make the request again.
-        if (InteractionRequiredAuthError.isInteractionRequiredError(err.errorCode)) {
-          this.authService.acquireTokenPopup({
-            scopes: this.authService.getScopesForEndpoint(url)
-          })
-        }
-      }
-    });
-  }
-
 }
