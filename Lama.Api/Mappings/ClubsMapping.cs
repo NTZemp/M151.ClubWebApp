@@ -1,10 +1,15 @@
 ﻿using System;
+using AutoMapper;
+using Lama.Api.Data.Models;
+using Lama.Api.Responses;
+
 namespace Lama.Api.Mappings
 {
-    public class ClubsMapping
+    public class ClubMapping : Profile
     {
-        public ClubsMapping()
+        public ClubMapping()
         {
+            CreateMap<Club, ClubResponse>();
         }
     }
 }

@@ -5,6 +5,10 @@ namespace Lama.Api.Responses
     {
         public UserResponse()
         {
+            
         }
+
+        public Guid UserId { get; set; }
+        public string Name { get; set; }
     }
 }

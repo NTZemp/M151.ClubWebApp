@@ -16,6 +16,7 @@ using Lama.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Lama.Api.Data.Services;
 using Lama.Api.Data.Services.Interfaces;
+using AutoMapper;
 
 namespace Lama.Api
 {
@@ -39,6 +40,9 @@ namespace Lama.Api
             );
             services.AddControllers();
             services.AddHttpContextAccessor();
+
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IClubsService, ClubsService>();
 

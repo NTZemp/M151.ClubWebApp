@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MsalService} from '@azure/msal-angular';
 import { msalAngularConfig, tokenRequest } from './app.config';
 import { AuthResponse, AuthError } from 'msal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { AuthResponse, AuthError } from 'msal';
 export class AppComponent implements OnInit{
   title = 'LamaFrontend';
   isAuthenticated:boolean;
-  constructor(private msal:MsalService){
+  constructor(private msal:MsalService, public router:Router){
     
   }
   ngOnInit(): void {
@@ -20,10 +21,6 @@ export class AppComponent implements OnInit{
     }else{
       this.isAuthenticated = true;
     }
-  }
-
-  profile(){
-
   }
 
   login(){

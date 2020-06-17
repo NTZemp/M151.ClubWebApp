@@ -10,7 +10,7 @@ import Club from 'src/app/models/club';
   styleUrls: ['./clubs.component.scss']
 })
 export class ClubsComponent implements OnInit {
-  clubs:Array<any>;
+  clubs:Array<Club>;
 
   clubName:string;
   constructor(private http: HttpClient,private authService:MsalService) { }
@@ -47,12 +47,13 @@ export class ClubsComponent implements OnInit {
         }
       }
     });
+    this.getClubs();
   }
 
   getClubs(){
     var url = 'https://localhost:5001/api/clubs';
     this.http.get(url).subscribe({
-      next: (clubs:Array<any>) => {
+      next: (clubs:Array<Club>) => {
         console.log(clubs);
         this.clubs = clubs;
       },

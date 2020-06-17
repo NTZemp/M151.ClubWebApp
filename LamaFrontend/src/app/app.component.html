@@ -19,8 +19,8 @@
         </a>
       </li>
       <li id="login" *ngIf="isAuthenticated == true">
-        <a (click)="profile()"> 
-          Profile
+        <a (click)="router.navigate(['/clubs']);"> 
+          Meine Vereine
         </a>
       </li>
     </ul>

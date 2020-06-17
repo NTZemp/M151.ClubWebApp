@@ -19,6 +19,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
 
@@ -27,6 +29,7 @@
     <Folder Include="Middleware\" />
     <Folder Include="Responses\" />
     <Folder Include="Requests\" />
+    <Folder Include="Mappings\" />
   </ItemGroup>
 
 </Project>
