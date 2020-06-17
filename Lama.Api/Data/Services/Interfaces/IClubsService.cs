@@ -12,5 +12,6 @@ namespace Lama.Api.Data.Services.Interfaces
         public Task<Club> Add(string clubName);
         public Task<Club> AddMember(Guid clubId, ApiUser user);
         public Task<Club> GetClub(Guid clubId);
+        public Task<Club> GetClubByName(string clubName);
     }
 }
