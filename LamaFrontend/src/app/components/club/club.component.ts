@@ -13,7 +13,6 @@ import User from 'src/app/models/user';
 export class ClubComponent implements OnInit {
   public club:ClubDetail;
   userName:string;
-
   constructor(private route:ActivatedRoute, private clubService:ClubService) { }
 
   ngOnInit(): void {
@@ -45,7 +44,6 @@ export class ClubComponent implements OnInit {
     user.userName = this.userName;
     this.clubService.addMember(this.club.clubId, this.userName).subscribe({
       next: any => {
-        console.log('user successfully added to club')
         this.getClub(this.club.clubName);
       },
       error: (err) => {
