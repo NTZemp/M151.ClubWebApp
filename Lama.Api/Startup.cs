@@ -39,10 +39,6 @@ namespace Lama.Api
                 options.UseSqlServer(Configuration.GetConnectionString("LamaConnectionString"))
             );
 
-            //services.AddDbContext<LamaContext>(options =>
-            //    options.UseInMemoryDatabase("LamaDb")
-            //);
-
             services.AddControllers();
             services.AddHttpContextAccessor();
 
@@ -56,7 +52,7 @@ namespace Lama.Api
                 options.AddPolicy(name: "CORS",
                                   builder =>
                                   {
-                                      builder.AllowAnyOrigin();
+                                      builder.WithOrigins("http://localhost:4200");
                                       builder.AllowAnyHeader();
                                       builder.AllowAnyMethod();
                                   });

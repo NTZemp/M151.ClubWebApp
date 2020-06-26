@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthError, InteractionRequiredAuthError } from 'msal';
 import { MsalService } from '@azure/msal-angular';
 import Club from 'src/app/models/club';
 import { ClubService } from 'src/app/services/club.service';
@@ -13,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ClubsComponent implements OnInit {
   clubs:Array<Club>;
-
+  isLoading:boolean;
   clubName:string;
+  
   constructor(private clubService:ClubService, private router:Router) { }
 
   ngOnInit(): void {
@@ -27,9 +26,11 @@ export class ClubsComponent implements OnInit {
   }
   
   getClubs(){
+    this.isLoading = true;
     this.clubService.getClubs().subscribe({
       next: (clubs:Array<Club>) => {
         this.clubs = clubs;
+        this.isLoading = false;
       },
       error: (err)=>{
         this.clubService.handleError(err);

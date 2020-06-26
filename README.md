@@ -43,7 +43,7 @@ abzulehnen, um nicht willkürlichen Vereinen zugefügt zu werden.
 9. Open the LamaFrontend directory in a terminal
 10. Make sure Node.js ist installed
 11. Run the command  `npm install` to restore all the packages
-12. After finishing run the command `ng serve`
+12. After finishing run the command `ng serve --port 4200`
 13. Open the browser where the angular server has started the website
 14. To test the invitation process create a new user in a incognito window and invite yourself :)
 
