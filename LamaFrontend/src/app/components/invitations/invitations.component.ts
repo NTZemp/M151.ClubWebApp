@@ -26,7 +26,6 @@ export class InvitationsComponent implements OnInit {
         next: () => {this.router.navigate(['/clubs'])}
       }
     );
-    this.getInvitations();
   }
 
 

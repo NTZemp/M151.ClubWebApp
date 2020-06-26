@@ -2,11 +2,8 @@
 <div id="container">
     <div id="clubs" class="item">
         <h2>Meine Vereine</h2>
-        <div *ngIf="isLoading">
+        <div *ngIf="clubs == null">
             laden...
-        </div>
-        <div *ngIf="isLoading == false && clubs.length == 0">
-            Du bist noch nicht mitglied in einem Verein
         </div>
         <div *ngFor="let club of clubs; index as i;">
             <a [routerLink]="['/clubs/' + club.clubName.replace(' ', '-')]">
