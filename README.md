@@ -39,5 +39,9 @@ abzulehnen, um nicht willkürlichen Vereinen zugefügt zu werden.
 5. Replace the LamaConnectionString value with the connection string to your MSSQL-Server the DB doesn't have to exist yet.
 6. Open a Terminal with which the CLI Tools can be accessed and open the Lama.Api folder inside the repository
 7. Enter command `dotnet ef database update`
-8. 
+8. In the same directory type in the command `dotnet run --configuration Release`
+9. Open the LamaFrontend directory in a terminal
+10. Make sure Node.js ist installed
+11. Run the command  `npm install` to restore all the packages
+12. After finishing run the command `ng serve`
 
