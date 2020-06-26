@@ -1,3 +1,9 @@
+<div *ngIf="isLoading">
+Laden...
+</div>
+<div *ngIf="!isLoading && invitations.length == 0">
+Keine neuen Einladungen
+</div>
 <ul>
     <li *ngFor="let invitation of invitations">
         {{invitation.clubName}}

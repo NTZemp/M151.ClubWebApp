@@ -1,16 +1,25 @@
 <h1>Vereine</h1>
-
-<input id="clubName" (keyup)="clubNameChanged($event)" placeholder="Vereinsname"/>
-<button (click)="createClub()">+</button>
-<!-- <div *ngIf="clubs.length == 0">
-Sie sind noch nicht miglied eines clubs
-</div> -->
-<br>
-<div *ngIf="clubs == null">
-    laden...
+<div id="container">
+    <div id="clubs" >
+        <h2>Meine Vereine</h2>
+        <div *ngIf="clubs == null">
+            laden...
+        </div>
+        <li  *ngFor="let club of clubs; index as i;">
+            <a [routerLink]="['/clubs/' + club.clubName.replace(' ', '-')]">
+                {{club.clubName}}
+            </a>
+        </li>
+    </div>
+    <div id="invitations">
+        <h2>Vereinseinladungen</h2>
+        <app-invitations></app-invitations>
+    </div>
+    <div id="create-club">
+        <h2>Verein erstellen</h2>
+        <input id="clubName" (keyup)="clubNameChanged($event)" placeholder="Vereinsname"/>
+        <button (click)="createClub()">+</button>
+    </div>
 </div>
-<li  *ngFor="let club of clubs; index as i;">
-    <a [routerLink]="['/clubs/' + club.clubName.replace(' ', '-')]">
-        {{club.clubName}}
-    </a>
-</li>
+
+

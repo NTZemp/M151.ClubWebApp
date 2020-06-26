@@ -1,0 +1,19 @@
+#container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    // display: inline-grid;
+    // grid-template-columns: auto auto auto;
+}
+
+// #clubs{
+//     grid-column: 1;
+// }
+
+// #invitations{
+//     grid-column: 2;
+// }
+
+// #create-club{
+//     grid-column: 3;
+// }

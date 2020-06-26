@@ -21,6 +21,10 @@ export class ClubsComponent implements OnInit {
    this.getClubs();
   }
 
+  invitations(){
+    this.router.navigate(['/invitations'])
+  }
+  
   getClubs(){
     this.clubService.getClubs().subscribe({
       next: (clubs:Array<Club>) => {
