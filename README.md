@@ -30,4 +30,4 @@ abzulehnen, um nicht willkürlichen Vereinen zugefügt zu werden.
 * Frontend - [Angular](https://angular.io)
 * ORM - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 * Datenbank - [MSSQL Server Community](https://www.microsoft.com/de-de/sql-server/sql-server-2019)
-* Containerisierung - [Docker](https://www.docker.com/) und [Docker Compose](https://docs.docker.com/compose/)
+
