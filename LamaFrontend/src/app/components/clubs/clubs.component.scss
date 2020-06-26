@@ -6,9 +6,26 @@
     // grid-template-columns: auto auto auto;
 }
 
-// #clubs{
-//     grid-column: 1;
-// }
+.item{
+    background-color: #07591C;
+    padding: 5%;
+    color: whitesmoke;
+    border-radius: 5%;
+}
+
+#clubs div{
+    list-style: none;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom: whitesmoke solid 1px;
+    :hover{
+        background-color: #077a24;
+    }
+    a{
+        text-decoration: none;
+        color: whitesmoke;
+    }
+}
 
 // #invitations{
 //     grid-column: 2;

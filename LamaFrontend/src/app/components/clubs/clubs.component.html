@@ -1,21 +1,22 @@
 <h1>Vereine</h1>
 <div id="container">
-    <div id="clubs" >
+    <div id="clubs" class="item">
         <h2>Meine Vereine</h2>
         <div *ngIf="clubs == null">
             laden...
         </div>
-        <li  *ngFor="let club of clubs; index as i;">
+        <div *ngFor="let club of clubs; index as i;">
             <a [routerLink]="['/clubs/' + club.clubName.replace(' ', '-')]">
                 {{club.clubName}}
             </a>
-        </li>
+        </div>
+
     </div>
-    <div id="invitations">
+    <div id="invitations" class="item">
         <h2>Vereinseinladungen</h2>
         <app-invitations></app-invitations>
     </div>
-    <div id="create-club">
+    <div id="create-club" class="item">
         <h2>Verein erstellen</h2>
         <input id="clubName" (keyup)="clubNameChanged($event)" placeholder="Vereinsname"/>
         <button (click)="createClub()">+</button>

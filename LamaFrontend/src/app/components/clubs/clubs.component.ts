@@ -18,6 +18,7 @@ export class ClubsComponent implements OnInit {
   constructor(private clubService:ClubService, private router:Router) { }
 
   ngOnInit(): void {
+    this.clubs = new Array<Club>();
    this.getClubs();
   }
 

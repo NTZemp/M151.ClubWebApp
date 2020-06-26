@@ -15,6 +15,7 @@ export class InvitationsComponent implements OnInit {
   constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
+    this.invitations = new Array<Invitation>();
     this.getInvitations();
   }
 
