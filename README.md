@@ -31,3 +31,13 @@ abzulehnen, um nicht willkürlichen Vereinen zugefügt zu werden.
 * ORM - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 * Datenbank - [MSSQL Server Community](https://www.microsoft.com/de-de/sql-server/sql-server-2019)
 
+### Installation
+1. Clone this repository
+2. Install MSSQL Server Community or use the [docker container](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash)
+3. Install the [.Net core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/) and the [EF Core Tools](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
+4. Open the appsettings.json file inside the Lama.Api folder
+5. Replace the LamaConnectionString value with the connection string to your MSSQL-Server the DB doesn't have to exist yet.
+6. Open a Terminal with which the CLI Tools can be accessed and open the Lama.Api folder inside the repository
+7. Enter command `dotnet ef database update`
+8. 
+
