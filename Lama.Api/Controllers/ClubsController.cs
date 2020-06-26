@@ -65,16 +65,25 @@ namespace Lama.Api.Controllers
             }
         }
 
-        [HttpPost("{id}/Add")]
-        public async Task<IActionResult> AddMember(Guid id, [FromBody] ApiUser user)
+
+        [HttpPost("{id}/invite")]
+        public async Task<IActionResult> Invite(Guid id, [FromBody] string userName)
         {
             try
             {
-                return new JsonResult(_mapper.Map<ClubResponse>(await _clubsService.AddMember(id,user)));
+                await _clubsService.AddInvitation(id, userName);
+                return new NoContentResult();
             }
             catch (UnauthorizedException)
             {
                 return new UnauthorizedResult();
+            }
+            catch (KeyNotFoundException ex )
+            {
+                return new NotFoundObjectResult(ex.Message);
+            }catch(InvalidOperationException ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
             }
         }
     }

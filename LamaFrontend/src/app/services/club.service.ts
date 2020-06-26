@@ -6,6 +6,7 @@ import { AuthError, InteractionRequiredAuthError } from 'msal';
 import { throwError, of, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import ClubDetail from '../models/clubDetail';
+import User from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +20,33 @@ export class ClubService {
   
   getClub(clubName:string): Observable<any>{
     var url = this.apiurl + 'clubs/' + clubName;
-    return this.http.get<ClubDetail>(url)
-    .pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<ClubDetail>(url);
   }
 
   getClubs():Observable<any>{
     var url = 'https://localhost:5001/api/clubs';
     return this.http.get<Array<Club>>(url);
-    // .pipe(
-    //   catchError(this.handleError)
-    // );
+  }
 
+  addMember(clubId:string, userName:string):Observable<any>{
+    var url = this.apiurl + 'clubs/' + clubId + '/invite'
+    return this.http.post(url,
+      JSON.stringify(userName),
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      });
+  }
+
+  createClub(clubName:string):Observable<any>{
+    var club = new Club();
+    club.clubName = clubName;
+    var url = 'https://localhost:5001/api/clubs';
+    return this.http.post(url,
+        JSON.stringify(club),
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        }
+      );
   }
 
 
@@ -57,21 +72,7 @@ export class ClubService {
 
 
 
-  createClub(clubName:string){
-    var club = new Club();
-    club.clubName = clubName;
-    var url = 'https://localhost:5001/api/clubs';
-    this.http.post(url,
-        JSON.stringify(club),
-        {
-          headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        }
-      ).subscribe({
-      next: result => {
-        console.log(result);
-      }
-    });
-  }
+  
 
 
 }

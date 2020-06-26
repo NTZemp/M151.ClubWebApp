@@ -38,29 +38,14 @@ namespace Lama.Api.Data.Services
             return entity.Entity;
         }
 
-        public async Task<Club> AddMember(Guid clubId,ApiUser user)
-        {
-            var membership = new ClubMembership { User = user };
-            var club = await _context.Clubs.FindAsync(clubId);
-            var currentUser = await _userService.GetLoggedInUserAsync();
-            var currentMembership = await _context.ClubMemberships.Where(x => 
-                x.UserId == currentUser.UserId && x.ClubId == clubId
-            ).SingleOrDefaultAsync();
-            if (await isMember(currentUser.UserId,clubId) && currentMembership.IsAdmin)
-            {
-                club.Memberships.Add(membership);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new UnauthorizedException($"Unauthorized to add to club with id, {clubId}");
-            }
-            return club;
-        }
-
         public async Task<bool> isMember(Guid userId, Guid clubId)
         {
             return await _context.ClubMemberships.AnyAsync(x => x.ClubId == clubId && x.UserId == userId);
+        }
+
+        public async Task<bool> isAdmin(Guid userId, Guid clubId)
+        {
+            return await _context.ClubMemberships.AnyAsync(x => x.ClubId == clubId && x.UserId == userId && x.IsAdmin == true);
         }
 
         public async Task<Club> GetClub(Guid clubId)
@@ -104,6 +89,27 @@ namespace Lama.Api.Data.Services
                 .Include(m => m.Club)
                 .ToListAsync();
             return memberships.Select(x => x.Club);
+        }
+
+        public async Task AddInvitation(Guid clubId, string userName)
+        {
+            var user = await _userService.GetLoggedInUserAsync();
+            if(await isAdmin(user.UserId,clubId))
+            {
+                var invitedUser = await _userService.GetUserByUserNameAsync(userName);
+                if(await isMember(clubId, invitedUser.UserId))
+                {
+                    throw new InvalidOperationException("User is already a member of this club");
+                }
+                var invitation = new ClubInvitation { ClubId = clubId, UserId = invitedUser.UserId };
+                await _context.AddAsync(invitation);
+                await _context.SaveChangesAsync();
+
+            }
+            else
+            {
+                throw new UnauthorizedException($"Not authorized to invite user to club with id, {clubId}");
+            }
         }
     }
 }

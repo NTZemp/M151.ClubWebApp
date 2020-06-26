@@ -15,6 +15,8 @@ namespace Lama.Api.Mappings
                 .ForMember(u => u.Name, opt => opt.MapFrom(source => source.User.GivenName));
             CreateMap<Club, ClubDetailsResponse>()
                 .ForMember(e => e.Members, opt => opt.MapFrom(c => c.Memberships));
+            CreateMap<ClubInvitation, InvitationResponse>()
+                .ForMember(e => e.ClubName, opt => opt.MapFrom(c => c.Club.ClubName));
 
         }
     }

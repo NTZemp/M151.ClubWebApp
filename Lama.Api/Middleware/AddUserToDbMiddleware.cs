@@ -19,19 +19,20 @@ namespace Lama.Api.Middleware
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, LamaContext userRepository)
+        public async Task InvokeAsync(HttpContext context, LamaContext lamaContext)
         {
             
             if(context.User.FindFirst(ClaimTypes.NameIdentifier) != null)
             {
                 var user = new ApiUser();
                 var id = context.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                if (!(await userRepository.Users.AnyAsync(x => x.UserId == Guid.Parse(id))))
+                if (!(await lamaContext.Users.AnyAsync(x => x.UserId == Guid.Parse(id))))
                 {
-                    var displayName = context.User.FindFirst(ClaimTypes.GivenName).Value;
                     user.UserId = Guid.Parse(id);
-                    user.GivenName = displayName;
-                    await userRepository.AddAsync(user);
+                    user.UserName = context.User.FindFirst("emails").Value;
+                    user.GivenName = context.User.FindFirst(ClaimTypes.GivenName).Value;
+                    await lamaContext.AddAsync(user);
+                    await lamaContext.SaveChangesAsync();
                 }
             }
             await _next(context);

@@ -4,14 +4,16 @@ using Lama.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lama.Api.Migrations
 {
     [DbContext(typeof(LamaContext))]
-    partial class LamaContextModelSnapshot : ModelSnapshot
+    [Migration("20200624130124_addCLubInvitations")]
+    partial class addCLubInvitations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

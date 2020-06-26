@@ -4,13 +4,15 @@ import { StartPageComponent } from './components/start-page/start-page.component
 import { ClubsComponent } from './components/clubs/clubs.component';
 import { MsalGuard, MsalService } from '@azure/msal-angular';
 import { ClubComponent } from './components/club/club.component';
+import { InvitationsComponent } from './components/invitations/invitations.component';
 
 
 const routes: Routes = [
   {path: '', component:StartPageComponent},
   { path: 'home',   component:StartPageComponent },
   {path:'clubs', component:ClubsComponent, canActivate: [MsalGuard]},
-  {path:'clubs/:name', component:ClubComponent, canActivate: [MsalGuard]}
+  {path:'clubs/:name', component:ClubComponent, canActivate: [MsalGuard]},
+  {path:'invitations', component:InvitationsComponent, canActivate: [MsalGuard]},
 ];
 
 @NgModule({

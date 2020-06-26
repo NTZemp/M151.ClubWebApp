@@ -9,7 +9,9 @@ namespace Lama.Api.Data.Services.Interfaces
     public interface IUserService
     {
         public Task<ApiUser> GetUserAsync(Guid userId);
+        public Task<ApiUser> GetUserByUserNameAsync(string userName);
         public Task<ApiUser> GetLoggedInUserAsync();
-
+        public Task<List<ClubInvitation>> GetInvitations();
+        public Task UpdateInvitationAsync(Guid invitationId, InvitationStatus invitationStatus);
     }
 }

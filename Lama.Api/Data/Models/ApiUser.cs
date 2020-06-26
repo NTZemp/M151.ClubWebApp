@@ -8,7 +8,9 @@ namespace Lama.Api.Data.Models
     {
         public Guid UserId { get; set; }
         public string GivenName { get; set; }
-        public virtual ICollection<ClubMembership> Memberships { get; set; }
+        public string UserName { get; set; }
 
+        public virtual ICollection<ClubMembership> Memberships { get; set; }
+        public virtual ICollection<ClubInvitation> ClubInvitations { get; set; }
     }
 }

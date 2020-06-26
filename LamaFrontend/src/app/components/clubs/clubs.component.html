@@ -6,7 +6,9 @@
 Sie sind noch nicht miglied eines clubs
 </div> -->
 <br>
-
+<div *ngIf="clubs == null">
+    laden...
+</div>
 <li  *ngFor="let club of clubs; index as i;">
     <a [routerLink]="['/clubs/' + club.clubName.replace(' ', '-')]">
         {{club.clubName}}

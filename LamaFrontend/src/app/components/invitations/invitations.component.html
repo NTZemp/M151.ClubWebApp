@@ -1,0 +1,8 @@
+<ul>
+    <li *ngFor="let invitation of invitations">
+        {{invitation.clubName}}
+        <button (click)="accept(invitation.invitationId)">Annehmen</button>
+        <button (click)="reject(invitation.invitationId)"> Ablehnen</button>
+    </li>
+</ul>
+

@@ -41,8 +41,15 @@ export class ClubsComponent implements OnInit {
   }
 
   createClub(){
-    this.clubService.createClub(this.clubName);
-    this.getClubs();
+    this.clubService.createClub(this.clubName)
+    .subscribe({
+      next: any =>{
+        this.getClubs();
+      },
+      error: (err)=>{
+        this.clubService.handleError(err);
+      }
+    });
     this.clubName = '';
   }
 }

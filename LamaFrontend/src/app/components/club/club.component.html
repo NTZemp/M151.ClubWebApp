@@ -1,6 +1,8 @@
 <div *ngIf="club != null">
     <h1 >{{club.clubName}}</h1>
-    <h2>Mitglieder</h2>
+    <h2>Mitglieder</h2> 
+    <input id="clubName" (keyup)="userNameChanged($event)" placeholder="benutzername"/>
+    <button (click)="addMember()">+</button>
     <li *ngFor="let user of club.members">
         {{user.name}}
     </li>

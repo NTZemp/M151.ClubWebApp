@@ -10,5 +10,7 @@ namespace Lama.Api.Data.Models
         public string ClubName { get; set; }
         public string ClubIcon { get; set; }
         public virtual ICollection<ClubMembership> Memberships { get; set; }
+        public virtual ICollection<ClubInvitation> ClubInvitations { get; set; }
+
     }
 }

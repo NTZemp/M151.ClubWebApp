@@ -35,9 +35,14 @@ namespace Lama.Api
             services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
                     .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
 
-            services.AddDbContext<LamaContext>(options => 
+            services.AddDbContext<LamaContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("LamaConnectionString"))
             );
+
+            //services.AddDbContext<LamaContext>(options =>
+            //    options.UseInMemoryDatabase("LamaDb")
+            //);
+
             services.AddControllers();
             services.AddHttpContextAccessor();
 
@@ -84,6 +89,7 @@ namespace Lama.Api
             app.UseCors("CORS");
 
             app.UseAddUserToDbIfNotExists();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

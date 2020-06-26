@@ -17,12 +17,15 @@ namespace Lama.Api.Data
         public DbSet<Club> Clubs { get; set; }
         public DbSet<ClubMembership> ClubMemberships { get; set; }
         public DbSet<ApiUser> Users { get; set; }
+        public DbSet<ClubInvitation> ClubInvitations { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ApiUserConfiguration());
             modelBuilder.ApplyConfiguration(new ClubConfiguration());
             modelBuilder.ApplyConfiguration(new ClubMembershipConfiguration());
+            modelBuilder.ApplyConfiguration(new ClubInvitationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
